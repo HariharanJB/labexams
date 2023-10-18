@@ -1,1 +1,37 @@
-hwllo
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from scipy.linalg import svd
+
+# Step 1: Import necessary libraries
+
+# Step 2: Load the CSV dataset
+data = pd.read_csv('car_data.csv')  # Replace 'your_dataset.csv' with your CSV file's path
+
+# Step 3: Preprocess the data (if necessary)
+
+# Example: Assuming you have a DataFrame with features in columns
+# and you want to standardize the data before performing SVD
+columns_to_drop = ['Gender', 'Purchased','User ID']
+X = data.drop(columns=columns_to_drop,axis = 1)
+Y = [data['Age'],data['AnnualSalary']] 
+print(Y)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(Y)
+
+# Step 4: Perform SVD using SciPy
+U, S, VT = svd(X_scaled)
+
+# U: Left singular vectors
+# S: Singular values
+# VT: Right singular vectors
+
+# You can access the singular values and the components as needed for your analysis
+print("Singular Values:")
+print(S)
+print("Left Singular Vectors (U):")
+print(U)
+print("Right Singular Vectors (VT):")
+print(VT)
+
+    
